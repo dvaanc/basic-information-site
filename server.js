@@ -1,24 +1,22 @@
 const http = require('http')
 const fs = require('fs')
 
-const port = process.env.PORT || 5500
+const hostname = '127.0.0.1'
+const port = process.env.port || 8080
 
-// const errorPage = fs.readFile('./404.html')
-// const aboutPage = fs.readFile('./about.html')
-// const contactPage = fs.readFile('./contact-me.html')
-// const indexPage = fs.readFile('./index.html')
+// const index = fs.readFile('./index.html');
 
-// const server = http.createServer((req, res) => {
-//   res.statusCode = 200
-//   // res.setHeadear('Content-Type', 'text-html')
-//   res.writeHead(200, {'content-type': 'text/html'})
-//   res.end(indexPage);
-// }).listen(port);
 const server = http.createServer((req, res) => {
+  const filename=__dirname+req.url
+  console.log(port)
   res.statusCode = 200
-  // res.setHeadear('Content-Type', 'text-html')
-  res.writeHead(200, {'content-type': 'text/plain'})
-  res.write('Test 123')
-  res.end();
-}).listen(port)
+  res.setHeader('Content-Type', 'text-html')
+  res.end(`${filename}`);
+
+})
+
+
+server.listen(port, () => {
+  console.log(`Server running at http://${port}`) 
+})
 
